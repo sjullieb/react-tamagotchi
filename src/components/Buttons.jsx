@@ -2,14 +2,11 @@ import React from 'react';
 
 function Buttons(props){
 
-  function handleFeeding(){
-    props.onButtonFeed();
-  }
   return(
     <div>
-      <button onClick={handleFeeding}>Feed</button>
-      <button onClick={handleSleeping}>Put to sleep</button>
-      <button onClick={handlePlaying}>Play</button>
+      <button onClick={()=>{props.onButtonFeed()}}>Feed</button>
+      <button onClick={()=>{props.onButtonSleep()}}>Put to sleep</button>
+      <button onClick={()=>{props.onButtonPlay()}}>Play</button>
     </div>
   );
 }

@@ -11,46 +11,59 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = {tamagotchi:{
       name: 'Tama',
       tiredness: 0,
       hunger: 0,
       happieness: 10,
       isAlive: true
-    };
+    }};
     this.handleFeedingTamagotchi = this.handleFeedingTamagotchi.bind(this);
+    this.handleSleepingTamagotchi = this.handleSleepingTamagotchi.bind(this);
+    this.handlePlayingTamagotchi = this.handlePlayingTamagotchi.bind(this);
+    console.log('constructor');
   }
 
   startGame(){
     this.tamagotchiUpdateTimer = setInterval(() =>
-        this.updateTamagotchi(), 10000
+        this.updateTamagotchi(), 1000
     );
   }
 
   componentDidMount(){
-    startGame();
+    console.log("DidMount");
+    this.startGame();
   }
 
   updateTamagotchi(){
-    let newTamagochi = Object.assign({},this.state);
+    let newTamagochi = Object.assign({},this.state.tamagotchi);
     newTamagochi.tiredness++;
     newTamagochi.hunger++;
     newTamagochi.happieness--;
 
     if(newTamagochi.tiredness>=10 || newTamagochi.hunger>=10 || newTamagochi.happieness<=0){
       newTamagochi.isAlive = false;
+      clearInterval(this.tamagotchiUpdateTimer);
     }
-    this.setState({this.state: newTamagochi});
+    this.setState({tamagotchi: newTamagochi});
+  }
+
+  handlePlayingTamagotchi(){
+    let newTamagochi = Object.assign({},this.state.tamagotchi);
+    newTamagochi.happieness++;
+    this.setState({tamagotchi: newTamagochi})
   }
 
   handleFeedingTamagotchi(){
-    let newTamagochi = Object.assign({},this.state);
-  }
-
-  handleFeedingTamagotchi(){
-    let newTamagochi = Object.assign({},this.state);
+    let newTamagochi = Object.assign({},this.state.tamagotchi);
     newTamagochi.hunger--;
-    this.setState({this.state: newTamagochi})
+    this.setState({tamagotchi: newTamagochi})
+  }
+
+  handleSleepingTamagotchi(){
+    let newTamagochi = Object.assign({},this.state.tamagotchi);
+    newTamagochi.tiredness--;
+    this.setState({tamagotchi: newTamagochi})
   }
   // componentWillMount(){
   //   console.log('componentWillMount');
@@ -78,14 +91,17 @@ class App extends React.Component {
   }
 
   render(){
+    console.log(this.state.tamagotchi);
     return (
       <div>
         <Header/>
-        <Tamagotchi tamagotchi={this.state} />
-        <Buttons/ onButtonFeed={this.props.handleFeedingTamagotchi}>
+        <Tamagotchi tamagotchi={this.state.tamagotchi} />
+        <Buttons
+          onButtonFeed={this.handleFeedingTamagotchi}
+          onButtonSleep={this.handleSleepingTamagotchi}
+          onButtonPlay={this.handlePlayingTamagotchi}/>
         <Switch>
 
-              //<Route component={Error404} />
         </Switch>
       </div>
     );

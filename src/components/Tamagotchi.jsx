@@ -1,7 +1,8 @@
 import React from 'react';
 
 function Tamagotchi(props){
-  var { tamagotchi } = props.tamagotchi;
+  var tamagotchi = props.tamagotchi;
+console.log(props);
   return(
     <div>
       <h3>{tamagotchi.name}</h3>
