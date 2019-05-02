@@ -11,13 +11,16 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {tamagotchi:{
-      name: 'Tama',
-      tiredness: 0,
-      hunger: 0,
-      happieness: 10,
-      isAlive: true
-    }};
+    this.state = {
+      tamagotchi:
+      {
+        name: 'Tama',
+        tiredness: 0,
+        hunger: 0,
+        happieness: 10,
+        isAlive: true
+      }
+    };
     this.handleFeedingTamagotchi = this.handleFeedingTamagotchi.bind(this);
     this.handleSleepingTamagotchi = this.handleSleepingTamagotchi.bind(this);
     this.handlePlayingTamagotchi = this.handlePlayingTamagotchi.bind(this);
