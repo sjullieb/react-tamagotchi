@@ -1,8 +1,11 @@
 import React from 'react';
 import Header from './Header';
+import Tamagotchi from './Tamagotchi';
 //import Error404 from './Error404';
 import { Switch, Route } from 'react-router-dom';
 import { v4 } from 'uuid';
+
+import Buttons from './Buttons';
 
 class App extends React.Component {
 
@@ -15,12 +18,17 @@ class App extends React.Component {
       happieness: 10,
       isAlive: true
     };
+    this.handleFeedingTamagotchi = this.handleFeedingTamagotchi.bind(this);
   }
 
   startGame(){
     this.tamagotchiUpdateTimer = setInterval(() =>
         this.updateTamagotchi(), 10000
     );
+  }
+
+  componentDidMount(){
+    startGame();
   }
 
   updateTamagotchi(){
@@ -32,10 +40,17 @@ class App extends React.Component {
     if(newTamagochi.tiredness>=10 || newTamagochi.hunger>=10 || newTamagochi.happieness<=0){
       newTamagochi.isAlive = false;
     }
+    this.setState({this.state: newTamagochi});
   }
 
-  checkIsTamagotchiAlive(){
+  handleFeedingTamagotchi(){
+    let newTamagochi = Object.assign({},this.state);
+  }
 
+  handleFeedingTamagotchi(){
+    let newTamagochi = Object.assign({},this.state);
+    newTamagochi.hunger--;
+    this.setState({this.state: newTamagochi})
   }
   // componentWillMount(){
   //   console.log('componentWillMount');
@@ -58,16 +73,6 @@ class App extends React.Component {
   //   console.log('componentDidUpdated');
   // }
 
-  updateTicketElapsedWaitTime(){
-  //  console.log('check');
-  //  console.log(this.state.masterTicketList);
-    let newMasterTicketList = Object.assign({}, this.state.masterTicketList);
-    Object.keys(newMasterTicketList).forEach(ticketId => {
-      newMasterTicketList[ticketId].formattedWaitTime = (newMasterTicketList[ticketId].timeOpen).fromNow(true);
-    })
-    this.setState({masterTicketList: newMasterTicketList});
-  }
-
   componentWillUnmount(){
     clearInterval(this.tamagotchiUpdateTimer);
   }
@@ -76,6 +81,8 @@ class App extends React.Component {
     return (
       <div>
         <Header/>
+        <Tamagotchi tamagotchi={this.state} />
+        <Buttons/ onButtonFeed={this.props.handleFeedingTamagotchi}>
         <Switch>
 
               //<Route component={Error404} />
