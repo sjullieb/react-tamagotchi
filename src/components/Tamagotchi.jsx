@@ -1,14 +1,14 @@
 import React from 'react';
 
 function Tamagotchi(props){
-  var tamagotchi = props.tamagotchi;
+  let { name, happieness, hunger, tiredness } = props.tamagotchi; // obj destructuring
 console.log(props);
   return(
     <div>
-      <h3>{tamagotchi.name}</h3>
-      <p>Happieness: {tamagotchi.happieness}</p>
-      <p>Hunger: {tamagotchi.hunger}</p>
-      <p>Tiredness: {tamagotchi.tiredness}</p>
+      <h3>{name}</h3>
+      <p>Happieness: {happieness}</p>
+      <p>Hunger: {hunger}</p>
+      <p>Tiredness: {tiredness}</p>
     </div>
   );
 }

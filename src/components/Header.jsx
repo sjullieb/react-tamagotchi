@@ -2,9 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Header(){
+  let color = {
+    color: '#934aa8',
+    fontSize: '50px'
+  }
+
   return (
     <div>
-      <h1>Tamagotchi</h1>
+      <h1 style={color}>JimAGotchi</h1>
       <Link to="/">Home</Link>
     </div>
   );

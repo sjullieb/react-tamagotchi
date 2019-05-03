@@ -14,7 +14,7 @@ class App extends React.Component {
     this.state = {
       tamagotchi:
       {
-        name: 'Tama',
+        name: 'JimAGotchi',
         tiredness: 0,
         hunger: 0,
         happieness: 10,
@@ -29,7 +29,7 @@ class App extends React.Component {
 
   startGame(){
     this.tamagotchiUpdateTimer = setInterval(() =>
-        this.updateTamagotchi(), 1000
+        this.updateTamagotchi(), 2000
     );
   }
 
